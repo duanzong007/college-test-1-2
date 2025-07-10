@@ -1,0 +1,40 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>mainwindow/mainwindow_background.png</file>
+        <file>mainwindow/close_hover.png</file>
+        <file>mainwindow/close_normal.png</file>
+        <file>mainwindow/max_hover.png</file>
+        <file>mainwindow/max_normal.png</file>
+        <file>mainwindow/min_hover.png</file>
+        <file>mainwindow/min_normal.png</file>
+        <file>mainwindow/bar_background.png</file>
+        <file>test.jpeg</file>
+        <file>sideBar/black1.png</file>
+        <file>sideBar/black0.png</file>
+        <file>sideBar/logo1.png</file>
+        <file>sideBar/logo2.png</file>
+        <file>sideBar/logo3.png</file>
+        <file>sideBar/logo4.png</file>
+        <file>sideBar/black2.png</file>
+        <file>sideBar/close.png</file>
+        <file>sideBar/open.png</file>
+        <file>logo.ico</file>
+        <file>sideBar/black3.png</file>
+        <file>sideBar/black4.png</file>
+        <file>photo.png</file>
+        <file>photo1.png</file>
+        <file>page0/year.png</file>
+        <file>page0/day.png</file>
+        <file>page0/hour.png</file>
+        <file>page0/month.png</file>
+        <file>page0/check.png</file>
+        <file>page0/no_check.png</file>
+        <file>page0/yes_check.png</file>
+        <file>start.png</file>
+        <file>page3/station.png</file>
+        <file>page3/arrow.png</file>
+        <file>page3/no.png</file>
+        <file>page3/yes.png</file>
+        <file>sideBar/heart.png</file>
+    </qresource>
+</RCC>

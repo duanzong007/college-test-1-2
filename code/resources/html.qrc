@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/html">
+        <file>page0/map.html</file>
+        <file>page1/flow.html</file>
+    </qresource>
+</RCC>

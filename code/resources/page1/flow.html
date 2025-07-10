@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="initial-scale=1.0,user-scalable=no,width=device-width"/>
+  <title>客流量热力图</title>
+  <style>
+    html, body, #container { margin:0; padding:0; width:100%; height:100%; }
+    /* 常显的站点标签 */
+    .station-label {
+      display: inline-block;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 14px;
+      color: #fff;
+      white-space: nowrap;
+      pointer-events: none; /* 鼠标穿透 */
+    }
+  </style>
+  <script>
+    window._AMapSecurityConfig = { securityJsCode: "1729571eaf163669bb725d4787ee3fb6" };
+  </script>
+  <script src="https://webapi.amap.com/maps?v=2.0&key=c79c4c0431272b23cd7f2812f289a660&plugin=AMap.HeatMap"></script>
+  <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+  <script>
+    var map, heatmap;
+    var bufHM = null, bufST = null, hmReady = false;
+
+    function initMap(){
+      map = new AMap.Map('container',{
+      viewMode:'3D',
+      zoom:8.5,
+      center:[105.3512, 30.1041]});
+      heatmap = new AMap.HeatMap(map,{radius:300});
+      hmReady = true;
+      if(bufHM){ doHeatmap(bufHM); bufHM=null; }
+      if(bufST){ doStations(bufST); bufST=null; }
+      new QWebChannel(qt.webChannelTransport, ch=>{ window.bridge = ch.objects.bridge; });
+    }
+    function doHeatmap(payload){
+      var pts = payload.data.map(it=>({lng:it.jing,lat:it.wei,count:it.pressure}));
+      heatmap.setDataSet({data:pts, max:1.2});
+    }
+    function refreshHeatmap(payload){
+      if(!hmReady) bufHM = payload;
+      else         doHeatmap(payload);
+    }
+
+    function doStations(list){
+      // 清除旧圆和旧标签
+      if(window.__circles)  window.__circles .forEach(m=>m.setMap(null));
+      if(window.__labels)   window.__labels .forEach(m=>m.setMap(null));
+      window.__circles = [];
+      window.__labels  = [];
+
+      list.forEach(function(it){
+        // 半径按压力值缩放，至少20px
+        var r = 30;
+        var circle = new AMap.Circle({
+          center: [it.jing, it.wei],
+          radius: r,
+          fillOpacity: 0.5,
+          strokeOpacity: 0
+        });
+        circle.setMap(map);
+        window.__circles.push(circle);
+
+        // 常显标签
+        var html = `
+          <div class="station-label">
+            ${it.name}<br/>
+            流量: ${it.flow}<br/>
+            压力: ${it.pressure.toFixed(2)}
+          </div>`;
+        var label = new AMap.Marker({
+          position: [it.jing, it.wei],
+          content: html,
+          offset: new AMap.Pixel(0, - 30),
+          clickable: false
+        });
+        label.setMap(map);
+        window.__labels.push(label);
+      });
+    }
+    function refreshStations(list){
+      if(!hmReady) bufST = list;
+      else         doStations(list);
+    }
+
+    window.onload = initMap;
+  </script>
+</head>
+<body>
+  <div id="container"></div>
+</body>
+</html>

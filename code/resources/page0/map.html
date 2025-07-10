@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width"/>
+  <title>高德地图</title>
+  <style>
+    html, body, #container {
+      width:100%; height:100%; margin:0; padding:0;
+    }
+    /* 列车标签的样式 */
+    .train-label {
+      display: inline-block;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 13px;
+      border-radius: 4px;
+      padding: 2px 6px;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .train-label div { line-height: 1.2; }
+  </style>
+
+  <!-- 安全密钥配置 -->
+  <script>
+    window._AMapSecurityConfig = {
+      securityJsCode: "1729571eaf163669bb725d4787ee3fb6"
+    };
+  </script>
+  <!-- 高德 JS API 2.0 -->
+  <script src="https://webapi.amap.com/maps?v=2.0&key=c79c4c0431272b23cd7f2812f289a660"></script>
+  <!-- Qt WebChannel -->
+  <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+
+  <script>
+    let map,
+        polylines = {},
+        trainCircles = {},
+        trainLabels = {};
+
+    function initMap() {
+      map = new AMap.Map("container", {
+        zoom: 8.5,
+        center: [105.3512, 30.1041]
+      });
+
+      new QWebChannel(qt.webChannelTransport, channel => {
+        window.bridge = channel.objects.bridge;
+        bridge.refreshLines.connect(refreshLines);
+        bridge.refreshTrains.connect(refreshTrains);
+      });
+    }
+
+    function refreshLines(lines) {
+      // 清除旧折线
+      for (let id in polylines) {
+        polylines[id].setMap(null);
+      }
+      polylines = {};
+
+      lines.forEach(l => {
+        if (!l.visible) return;
+        const path = l.stations.map(s => [s.jing, s.wei]);
+        polylines[l.id] = new AMap.Polyline({
+          map, path,
+          strokeColor: l.color,
+          strokeWeight: 3,
+          strokeOpacity: 1
+        });
+      });
+    }
+
+    function refreshTrains(trains) {
+      // 清除旧圆点和标签
+      for (let id in trainCircles)  trainCircles[id].setMap(null);
+      for (let id in trainLabels)   trainLabels[id].setMap(null);
+      trainCircles = {};
+      trainLabels  = {};
+
+      // 1) 按位置分组
+      const groups = {};
+      trains.forEach(t => {
+        if (!t.visible) return;
+        const key = `${t.position.first.toFixed(6)},${t.position.second.toFixed(6)}`;
+        (groups[key] || (groups[key]=[])).push(t);
+      });
+
+      // 2) 遍历每组，垂直分散
+      const spacing = 40; // 垂直间距 px，可调
+      for (let key in groups) {
+        const list = groups[key];
+        const n = list.length;
+        list.forEach((t, i) => {
+          const pos = [t.position.first, t.position.second];
+
+          // 圆点
+          trainCircles[t.id] = new AMap.CircleMarker({
+            map,
+            center: pos,
+            radius: 6,
+            fillColor: "#007aff",
+            strokeWeight: 0
+          });
+
+          // 计算垂直偏移
+          const baseOffset = -15; // 标签抬高基准，可调
+          const offsetY = baseOffset + (i - (n-1)/2) * spacing;
+
+          // 标签 HTML
+          const html = `
+            <div class="train-label">
+              <div>${t.code} – ${t.endStation}</div>
+              <div>${t.currentPeople} 人, ${(t.loadRate*100).toFixed(1)} %</div>
+            </div>`;
+
+          // 标签 Marker
+          trainLabels[t.id] = new AMap.Marker({
+            map,
+            position: pos,
+            offset: new AMap.Pixel(0, offsetY),
+            anchor: 'bottom-center',
+            content: html
+          });
+        });
+      }
+    }
+
+    window.onload = initMap;
+  </script>
+</head>
+<body>
+  <div id="container"></div>
+</body>
+</html>
