@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>page0_main</class>
+ <widget class="QWidget" name="page0_main">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#page0_main{
+border-bottom-right-radius:12px;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QWidget" name="bar" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>45</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#bar{
+border-image: url(:/images/sideBar/black0.png) 0 0 0 0 stretch stretch;
+
+}</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="topMargin">
+       <number>5</number>
+      </property>
+      <property name="bottomMargin">
+       <number>5</number>
+      </property>
+      <item>
+       <widget class="QWidget" name="time" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#time {
+        background-image: url(:/images/sideBar/black2.png);
+		border-radius: 12px;
+		color: rgb(55, 55, 55);
+    }
+
+QLabel {
+	color: rgb(55, 55, 55);
+	font-size: 13pt; 
+	
+}
+
+
+
+/* 1. 主控件：文字居中 + 拉伸背景图 */
+QComboBox {
+    border: none;                             /* 去掉原有边框 */
+           /* 为 drop-down 留空间 */
+    /* 九宫格切片：上 5 下 5 左 5 右 5，按需调整 */
+    border-image: url(:/images/sideBar/black2.png) 0 0 0 0 stretch stretch;
+	color: rgb(55, 55, 55);
+}
+
+/* 2. 下拉按钮区域（右半边）背景也用九宫格 */
+QComboBox::drop-down {
+    subcontrol-origin: padding;               /* 以 padding 区域为基准 */
+    subcontrol-position: top right;           /* 放到右上角 */     
+    border: none;
+    border-image: url(:/images/sideBar/black2.png) 0 0 0 0 stretch stretch;
+}
+
+QComboBox:hover {
+    border-image: url(:/images/sideBar/black3.png) 0 0 0 0 stretch stretch;
+}
+
+
+
+/* 3. 弹出列表背景（popup） */
+QComboBox QAbstractItemView {
+   /* border: none;
+    outline: none;*/                            /* 去除 focus 虚线 */
+    border-image: url(:/images/sideBar/black2.png) 0 0 0 0 stretch stretch;
+    background: transparent;
+
+}
+
+/* 4. 列表项样式 */
+QComboBox QAbstractItemView::item {
+	border-image: url(:/images/sideBar/black2.png) 0 0 0 0 stretch stretch;
+   	color: rgb(55, 55, 55);  
+}
+
+/* 5. 选中项背景——用 border-image 切片显示图片 */
+QComboBox QAbstractItemView::item:selected {
+    border-image: url(:/images/sideBar/black3.png) 0 0 0 0 stretch stretch;
+    color: rgb(55, 55, 55);                           /* 可选，调整文字色 */
+}
+</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <property name="spacing">
+          <number>20</number>
+         </property>
+         <property name="leftMargin">
+          <number>13</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QComboBox" name="year">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>56</width>
+             <height>35</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>56</width>
+             <height>35</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">/* 2.2 箭头图标大小 */
+QComboBox::down-arrow {
+    image: url(:/images/page0/year.png);
+    width: 17px;
+    height: 17px;
+}</string>
+           </property>
+           <property name="currentText">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="month">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>38</width>
+             <height>35</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>38</width>
+             <height>35</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">/* 2.2 箭头图标大小 */
+QComboBox::down-arrow {
+    image: url(:/images/page0/month.png);
+    width: 17px;
+    height: 17px;
+}</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="day">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>38</width>
+             <height>35</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>38</width>
+             <height>35</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">/* 2.2 箭头图标大小 */
+QComboBox::down-arrow {
+    image: url(:/images/page0/day.png);
+    width: 17px;
+    height: 17px;
+}</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="hour">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>38</width>
+             <height>35</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>38</width>
+             <height>35</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">/* 2.2 箭头图标大小 */
+QComboBox::down-arrow {
+    image: url(:/images/page0/hour.png);
+    width: 17px;
+    height: 17px;
+}</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="checkbutton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>35</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>60</width>
+             <height>35</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">#checkbutton {
+        border: none;
+		outline: none;
+        background-image: url(:/images/sideBar/black2.png);
+		border-bottom-right-radius: 12px;
+		border-top-right-radius: 12px;
+		color: rgb(55, 55, 55);
+    }
+#checkbutton:hover {
+        background-image: url(:/images/sideBar/black3.png);
+    }
+#checkbutton:pressed {
+        background-image: url(:/images/sideBar/black4.png);
+    }</string>
+           </property>
+           <property name="text">
+            <string>确认</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="linebutton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>80</horstretch>
+          <verstretch>35</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#linebutton {
+        border: none;
+		outline: none;
+        background-image: url(:/images/sideBar/black2.png);
+		border-radius: 12px;
+		color: rgb(55, 55, 55);
+    }
+#linebutton:hover {
+        background-image: url(:/images/sideBar/black3.png);
+    }
+#linebutton:pressed {
+        background-image: url(:/images/sideBar/black4.png);
+    }</string>
+        </property>
+        <property name="text">
+         <string>线路</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="trainbutton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#trainbutton {
+        border: none;
+		outline: none;
+        background-image: url(:/images/sideBar/black2.png);
+		border-radius: 12px;
+		color: rgb(55, 55, 55);
+    }
+#trainbutton:hover {
+        background-image: url(:/images/sideBar/black3.png);
+    }
+#trainbutton:pressed {
+        background-image: url(:/images/sideBar/black4.png);
+    }</string>
+        </property>
+        <property name="text">
+         <string>列车</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="map" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <layout class="QHBoxLayout" name="layout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="button" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>12</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>12</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-image: url(:/images/mainwindow/mainwindow_background.png) 0 0 0 0 stretch stretch;
+border-bottom-right-radius:12px;
+</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
